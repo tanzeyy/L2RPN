@@ -17,6 +17,7 @@ import copy
 import matplotlib.pyplot as plt
 import datetime
 
+from parl.utils import logger, summary
 from collections import defaultdict, deque
 from pypownet.environment import RunEnv
 from pypownet.agent import Agent
@@ -556,6 +557,7 @@ class Runner(object):
         state = self.environment.reset() if episode != 0 else self.environment._get_obs().as_array()
         state = np.array(state).reshape((-1, self.n_features))
 
+        episode_reward = []
         for step in itertools.count():
           reward_tot = 0
           # update the target estimator
@@ -644,7 +646,7 @@ class Runner(object):
           # take a step
           next_state, reward, done, info, flag_next_chronic = self.environment.step(
               self.action_space[action])
-
+          episode_reward.append(reward)
           score = self.get_score()
 
           if done:
@@ -705,8 +707,9 @@ class Runner(object):
           if done or step_tot > total_train_step or flag_next_chronic:
             break
 
+        summary.add_scalar('train/episode_reward', np.sum(episode_reward), episode)
         # save model per episode
-        self.saver.save(sess, self.model_dir + '/{}_model_176_step_{}_{}.ckpt'.format(isco, total_train_step, self.timestamp))
+        self.saver.save(sess, self.model_dir + '/{}_model_251_step_{}_{}.ckpt'.format(isco, total_train_step, self.timestamp))
         print('Model Saved!')
 
         # verbose episode summary
