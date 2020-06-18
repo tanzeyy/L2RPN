@@ -79,7 +79,7 @@ class Runner(object):
     # Directory
     self.data_dir = os.path.abspath('data')
     action_to_index_dir = os.path.join(self.data_dir, 'action_to_index.npy')
-    action_dir = os.path.join(self.data_dir, 'actions_176.npy')
+    action_dir = os.path.join(self.data_dir, 'actions_251.npy')
     log_dir = os.path.abspath("./logs")
     self.model_dir = os.path.join(self.data_dir, 'model_saved')
     self.results_dir = os.path.abspath("./results")
@@ -501,7 +501,7 @@ class Runner(object):
             action, q_predictions = self.dqn_main.act(sess, X_bacth[0].reshape((1, self.n_features)), 0)
             print('y: {}\nq_predict: {}\n'.format(np.argmax(y_batch[0]), action))
 
-          save model
+          # save model
           if (i + 1) % 500 == 0 and not test:
             print('Model Saved!')
             self.saver.save(sess, self.model_dir + '/1_FC_model_251_imitation_{}_batch_{}.ckpt'.format(data_size, self.batch_size))

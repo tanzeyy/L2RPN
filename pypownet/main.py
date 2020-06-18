@@ -107,7 +107,7 @@ def main():
                 verbose_per_episode=1,
                 seed=22)
 
-    runner.train(total_train_step=500000, model_name='model_176_imitation_35380_batch_1', isco='FC')
+    runner.train(total_train_step=500000, model_name='model_251_imitation_40000_batch_1', isco='FC')
 
     # model_3120_imitation_45125
     # model_3120_step_1000000_06-07-17-56
