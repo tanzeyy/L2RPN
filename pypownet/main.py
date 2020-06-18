@@ -94,7 +94,7 @@ def main():
                 args.level,
                 args.niter,
                 n_features=538,
-                n_episode=10,
+                n_episode=10000,
                 learning_rate=1e-4,
                 gamma=0.99,
                 replace_target_iter=128,

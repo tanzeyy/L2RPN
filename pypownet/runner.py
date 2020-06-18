@@ -707,7 +707,7 @@ class Runner(object):
           if done or step_tot > total_train_step or flag_next_chronic:
             break
 
-        summary.add_scalar('train/episode_reward', np.sum(episode_reward), episode)
+        summary.add_scalar('train/episode_reward', np.mean(episode_reward), episode)
         # save model per episode
         self.saver.save(sess, self.model_dir + '/{}_model_251_step_{}_{}.ckpt'.format(isco, total_train_step, self.timestamp))
         print('Model Saved!')
